@@ -1,0 +1,141 @@
+.headerBox {
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header {
+    position: fixed;
+    top: 0;
+    width: 90%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1%;
+    background-color: var(--background-color);
+    z-index: 1000;
+    margin-top: 25px;
+    border-radius: 28px;
+}
+
+.moblieHeader {
+    display: none;
+}
+
+.middelSide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 45px;
+}
+
+.headerLink {
+    position: relative;
+    color: var(--second-color);
+    text-decoration: none;
+    font-size: 25px;
+    border-radius: 28px;
+    padding: 7px;
+    transition: .3s;
+}
+
+.headerLink::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--second-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.headerLink:hover::after {
+    transform: scaleX(1); 
+}
+
+.contact {
+    background-color: var(--second-color);
+    text-decoration: none;
+    font-size: 25px;
+    color: var(--background-color);
+    border-radius: 28px;
+    padding: 7px;
+    transition: .3s;
+}
+
+.contact:hover {
+    background-color: #9ab81f;
+}
+
+.leftSide {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.mobileBar {
+    display: none;
+}
+
+@media(max-width: 767px) {
+    .header {
+        display: none;
+    }
+    .moblieHeader {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 15px 1%;
+        overflow: hidden;
+        background-color: var(--background-color);
+        transition: .3s;
+        z-index: 1000;
+    }
+    .moblieHeader.active {
+        height: 300px;
+    }
+    .head {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .leftSide {
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+
+    .rightSide button {
+        background-color: transparent;
+        border: none;
+        color: var(--second-color);
+        font-size: 25px;
+    }
+
+    .body {
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 1%;
+    }
+    .moblieLinks {
+        text-decoration: none;
+        color: var(--second-color);
+        font-size: 20px;
+    }
+}

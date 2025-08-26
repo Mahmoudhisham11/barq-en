@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --black-color: #0f1104;
+    --background-color: black;
+    --second-color: #d4ff26;
+}
+body {
+    direction: rtl;
+    font-family: 'Tajawal';
+}
+html {
+    scroll-behavior: smooth;
+}
+.main {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--background-color);
+}
