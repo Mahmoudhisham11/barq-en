@@ -35,8 +35,8 @@ function Footer() {
                     </div>
                 </div>
                 <div className={styles.icons}>
-                    <Link href={"/"} className={styles.iconsLinks}><FaInstagram/></Link>
-                    <Link href={"/"} className={styles.iconsLinks}><FaFacebookF/></Link>
+                    <Link href={"https://www.instagram.com/barq.shipping?igsh=MXh0bm9vb2gzbWhuYQ=="} target="_blank" className={styles.iconsLinks}><FaInstagram/></Link>
+                    <Link href={"https://www.facebook.com/share/1B5jhDctVv/"} target="_blank" className={styles.iconsLinks}><FaFacebookF/></Link>
                 </div>
                 <hr style={{width: '100%'}} />
                 <div className={styles.cobyRights}>
