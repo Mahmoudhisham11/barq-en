@@ -1,6 +1,6 @@
 .contact {
     width: 100%;
-    height: calc(100vh - 80px);
+    height: fit-content;
     padding: 50px 25px 50px 25px;
     color: white;
 }
@@ -53,14 +53,14 @@
 }
 
 @media(max-width: 767px) {
-    .contact {
-        height: fit-content;
-    }
     .title {
         width: 100%;
         justify-content: center;
         align-items: center;
         text-align: center;
+    }
+    .title h3 {
+        font-size: 30px;
     }
     .content {
         flex-direction: column;

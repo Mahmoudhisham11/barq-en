@@ -48,6 +48,9 @@
         text-align: center;
     }
     .text h2 {
-        font-size: 30px;
+        font-size: 25px;
+    }
+    .heroLink {
+        font-size: 20px;
     }
 }

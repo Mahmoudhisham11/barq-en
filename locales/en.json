@@ -29,7 +29,6 @@
   "servicesCard3H3": "Collection",
   "servicesCard3p": "With our collection service, you can easily receive your collections daily, and we also offer you the possibility of obtaining an advance of up to 15%.",
 
-
   "contactTitle": "Contact us",
   "contactSubtitle": "Let's start working together",
   "contactDesc": "Get in touch to start shipping your goods",
@@ -38,5 +37,13 @@
   "phone2": "+20 122 223 3666",
   "phone3": "+20 112 678 4187",
   "phone4": "+20 109 528 9495",
+
+  "footerTitleP1":"With",
+  "footerTitleP2":"BARQ,",
+  "footerTitleP3":"the fastest shipment in Egypt from Cairo and Giza to Alexandria, Lower Egypt, Hurghada and Upper Egypt",
+  "footerLinkTitle":"Fast Links",
+  "copyRight":"Licensed copy of BARQ Company. All rights reserved.",
+  "companyName":"Designed By:",
+
   "changeLang": "العربية"
 }

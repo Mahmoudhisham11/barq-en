@@ -12,7 +12,7 @@ function Contact() {
     const t = locale === "ar" ? ar : en;
 
     return(
-        <div className={styles.contact}>
+        <div className={styles.contact} id="contact">
             <div className={styles.title}>
                 <p>{t.contactTitle}</p>
                 <h3>{t.contactSubtitle}</h3>

@@ -2,6 +2,7 @@
 
 import About from "@/components/About/page"
 import Contact from "@/components/Contact/page"
+import Footer from "@/components/Footer/page"
 import Hero from "@/components/Hero/page"
 import Services from "@/components/Services/page"
 
@@ -12,6 +13,7 @@ export default function Home() {
       <About />
       <Services />
       <Contact />
+      <Footer/>
     </main>
   )
 }
