@@ -1,22 +1,37 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Reset عام */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+/* الألوان */
 :root {
-    --black-color: #0f1104;
-    --background-color: black;
-    --second-color: #d4ff26;
+  --black-color: #0f1104;
+  --background-color: #000; /* خلفية أسود */
+  --second-color: #d4ff26;  /* لون تاني */
 }
+
+/* الخط الافتراضي */
 body {
-    direction: rtl;
-    font-family: 'Tajawal';
+  font-family: 'Josefin Sans', sans-serif; /* إنجليزي افتراضي */
+  background-color: var(--background-color);
+  color: var(--second-color);
+  line-height: 1.6;
 }
+
+/* لو الموقع RTL */
+body.rtl {
+  font-family: 'Tajawal', sans-serif;
+}
+
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
+
+/* العنصر الأساسي للصفحات */
 .main {
-    width: 100%;
-    min-height: 100vh;
-    background-color: var(--background-color);
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--background-color);
 }

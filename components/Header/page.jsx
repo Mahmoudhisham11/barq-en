@@ -1,56 +1,141 @@
-'use client';
-import styles from './styles.module.css';
-import logo from "../../public/images/logo.png";
-import Image from 'next/image';
-import Link from 'next/link';
-import { FaBarsStaggered } from "react-icons/fa6";
-import { useState } from 'react';
+'use client'
+import { useRouter, usePathname, useSearchParams } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
+import { FaBars } from "react-icons/fa6";
+import gsap from "gsap"
+import ar from "../../locales/ar.json"
+import en from "../../locales/en.json"
+import styles from "./styles.module.css"
+import Image from "next/image"
+import logo from "../../public/images/logo.png"
+import Link from "next/link"
+import egypt from "../../public/images/egypt.png"
+import uk from "../../public/images/uk.png"
 
-function Header() {
-    const [active, setActive] = useState(false)
-    return(
-        <div className={styles.headerContainer}>
-            <div className={styles.headerBox}>
-                <div className={styles.header}>
-                    <div className={styles.rightSide}>
-                        <Link href={"https://barq.visionsubscribe.com/FollowUpOreders"} className={styles.contact}>متابعة الشحنات</Link>
-                    </div>
-                    <div className={styles.middelSide}>
-                        <Link href={"/"} className={styles.headerLink}>الصفحة الرئيسية</Link>
-                        <Link href={"/"} className={styles.headerLink}>من نحن</Link>
-                        <Link href={"/"} className={styles.headerLink}>خدماتنا</Link>
-                        <Link href={"/"} className={styles.headerLink}>اتصل بنا</Link>
-                    </div>  
-                    <div className={styles.leftSide}>
-                        <Link href={"/"}>
-                            <Image src={logo} fill style={{objectFit: 'cover'}} alt='logo'/>
-                        </Link>
-                    </div>
+export default function Header() {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const locale = searchParams.get("locale") || "en"
+  const t = locale === "ar" ? ar : en
 
-                </div>
-            </div>
-            <div className={active ? `${styles.moblieHeader} ${styles.active}` : `${styles.moblieHeader}`}>
-                <div className={styles.head}>
-                    <div className={styles.rightSide}>
-                        <button onClick={() => setActive(active ? false : true)}><FaBarsStaggered/></button>
-                    </div>
-                    <div className={styles.leftSide}>
-                        <Link href={"/"}>
-                            <Image src={logo} fill style={{objectFit: 'cover'}} alt='logo' />
-                        </Link>
-                    </div>
-                </div>
-                <div className={styles.body} style={{display: active ? 'flex' : 'none'}}>
-                    <Link href={"/"} className={styles.moblieLinks}>الصفحة الرئيسية</Link>
-                    <Link href={"/"} className={styles.moblieLinks}>من نحن</Link>
-                    <Link href={"/"} className={styles.moblieLinks}>خدماتنا</Link>
-                    <Link href={"/"} className={styles.moblieLinks}>اتصل بنا</Link>
-                    <Link href={"https://barq.visionsubscribe.com/FollowUpOreders"} className={styles.moblieLinks}>متابعة الشحنات</Link>
+  // refs for gsap
+  const menuRef = useRef(null)
+  const linksRef = useRef([])
+  const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
-                </div>
-            </div>
+  // تغيير اتجاه الصفحة
+  useEffect(() => {
+    document.documentElement.dir = locale === "ar" ? "rtl" : "ltr"
+    document.body.classList.toggle("rtl", locale === "ar")
+  }, [locale])
+
+  // دالة تبديل اللغة
+  const toggleLocale = () => {
+    const newLocale = locale === "ar" ? "en" : "ar"
+    const params = new URLSearchParams(searchParams.toString())
+    params.set("locale", newLocale)
+    router.push(`${pathname}?${params.toString()}`)
+    document.body.classList.toggle("rtl", newLocale === "ar")
+  }
+
+  // فتح/قفل المينيو مع انيميشن
+  useEffect(() => {
+    if (isOpen) {
+      gsap.to(menuRef.current, { 
+        height: "auto", 
+        duration: 0.5, 
+        ease: "power2.out" 
+      })
+      gsap.fromTo(
+        linksRef.current,
+        { y: -20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, delay: 0.2 }
+      )
+    } else {
+      gsap.to(menuRef.current, { 
+        height: 0, 
+        duration: 0.4, 
+        ease: "power2.in" 
+      })
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  return (
+    <header className={styles.headerContainer}>
+      <div className={styles.header} style={{backgroundColor: isScrolled ? 'black' : 'transparent'}}>
+        <div className={styles.imageContainer}>
+          <Image src={logo} fill style={{ objectFit: "cover" }} alt="logo" />
         </div>
-    )    
+        <div className={styles.linksContainer}>
+          <Link href={"#home"} className={styles.headerLink}>{t.homeLink}</Link>
+          <Link href={"#about"} className={styles.headerLink}>{t.aboutLink}</Link>
+          <Link href={"#services"} className={styles.headerLink}>{t.servicesLink}</Link>
+          <Link href={"#contact"} className={styles.headerLink}>{t.contactLink}</Link>
+        </div>
+        <div className={styles.langBtnContainer}>
+          <button onClick={toggleLocale} className={styles.langBtn}>
+            <Image
+              src={locale === "ar" ? uk : egypt}
+              alt="switch language"
+              fill
+              style={{objectFit: 'cover'}}
+            />
+          </button>
+        </div>
+      </div>
+      {/* Mobile Header */}
+      <div className={styles.moblieHeader}>
+        <div className={styles.head}>
+          <div className={styles.mobileImage}>
+            <Image src={logo} fill style={{ objectFit: "cover" }} alt="logo" />
+          </div>
+          <div className={styles.headerBtn}>
+            <button onClick={() => setIsOpen(!isOpen)}>
+              <FaBars/>
+            </button>
+          </div>
+        </div>
+        <div 
+          className={styles.body} 
+          ref={menuRef} 
+          style={{ height: 0, overflow: "hidden" }}
+        >
+          {["home", "about", "services", "contact"].map((link, i) => (
+            <Link 
+              key={link}
+              href={`#${link}`} 
+              className={styles.moblieLinks} 
+              ref={(el) => (linksRef.current[i] = el)}
+            >
+              {t[`${link}Link`]}
+            </Link>
+          ))}
+          <div className={styles.moblieLangContainer}>
+            <button onClick={toggleLocale} className={styles.langBtn}>
+              <Image
+                src={locale === "ar" ? uk : egypt}
+                alt="switch language"
+                fill
+                style={{objectFit: 'cover'}}
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+  )
 }
-
-export default Header;

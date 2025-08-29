@@ -1,56 +1,79 @@
 'use client';
+import { useSearchParams } from "next/navigation";
+import ar from "../../locales/ar.json";
+import en from "../../locales/en.json";
 import styles from "./styles.module.css";
-import { IoIosCall } from "react-icons/io";
-import { TbTruckDelivery } from "react-icons/tb";
+import { PiPhoneCallFill } from "react-icons/pi";
+import { RiComputerLine } from "react-icons/ri";
 import { GrMoney } from "react-icons/gr";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function Services() {
-    return(
-        <div className={styles.about}>
-            <div className={styles.title}>
-                <p>خدماتنا</p>
-                <h3>لما تختار العمل مع برق</h3>
-                <p>لان برق ستجعل توصيل شحناتك اسهل باستخدام المميزات اللتي نملكها</p>
-            </div>
-            <div className={styles.content}>
-                <div className={styles.contentContainer}>
-                    <div className={styles.card}>
-                        <div className={styles.cardTitle}><strong><IoIosCall/></strong></div>
-                        <div className={styles.cardContent}>
-                            <div className={styles.cardHead}>
-                                <h3>خدمة العملاء</h3>
-                            </div>
-                            <div className={styles.cardBody}>
-                                <p>لدينا فريق متخصص لخدمة العملاء لحل جميع مشاكل عملاءنا ومتابعة عملاءنا لحظة بلحظة في ادارة شحناتهم</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.cardTitle}><strong><TbTruckDelivery/></strong></div>
-                        <div className={styles.cardContent}>
-                            <div className={styles.cardHead}>
-                                <h3>متابعة الشحنات والحسابات</h3>
-                            </div>
-                            <div className={styles.cardBody}>
-                                <p>
-                                    من خلال حسابك على برنامج الشركة
-                                    هتقدر تتابع شحناتك وتشوف وتعرف كل شحنة ليك معانا فين وحالتها ايه
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.cardTitle}><strong><GrMoney/></strong></div>
-                        <div className={styles.cardContent}>
-                            <div className={styles.cardHead}>
-                                <h3>التحصيل</h3>
-                            </div>
-                            <div className={styles.cardBody}>
-                                <p>يوفر الحماية الى حزمتك مما يضيف الامان عند شحن البضائع</p>
-                            </div>
-                        </div>
-                    </div>
+    const searchParams = useSearchParams();
+    const locale = searchParams.get("locale") || "en";
+    const t = locale === "ar" ? ar : en;
 
+    const servicesRef = useRef(null);
+
+    useEffect(() => {
+        const el = servicesRef.current;
+
+        gsap.fromTo(el,
+            { y: 100, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse", 
+                }
+            }
+        );
+    }, []);
+
+    return (
+        <div className={styles.servicesContainer} id="services">
+            <div className={styles.services} ref={servicesRef}>
+                <div className={styles.title}>
+                    <p>{t.servicesIntro}</p>
+                    <h2>{t.servicesHeadline}</h2>
+                    <p>{t.servicesDesc}</p>
+                </div>
+                <div className={styles.content}>
+                    <div className={styles.card}>
+                        <div className={styles.cardHead}>
+                            <p><PiPhoneCallFill /></p>
+                        </div>
+                        <div className={styles.cardBody}>
+                            <h3>{t.servicesCard1H3}</h3>
+                            <p>{t.servicesCard1p}</p>
+                        </div>
+                    </div>
+                    <div className={styles.card}>
+                        <div className={styles.cardHead}>
+                            <p><RiComputerLine /></p>
+                        </div>
+                        <div className={styles.cardBody}>
+                            <h3>{t.servicesCard2H3}</h3>
+                            <p>{t.servicesCard2p}</p>
+                        </div>
+                    </div>
+                    <div className={styles.card}>
+                        <div className={styles.cardHead}>
+                            <p><GrMoney /></p>
+                        </div>
+                        <div className={styles.cardBody}>
+                            <h3>{t.servicesCard3H3}</h3>
+                            <p>{t.servicesCard3p}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

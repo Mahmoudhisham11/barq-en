@@ -1,84 +1,73 @@
-.headerBox {
-    width: 100%;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .header {
     position: fixed;
     top: 0;
-    width: 90%;
+    width: 100%;
     height: 80px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 1%;
-    background-color: var(--background-color);
+    justify-content: space-between;
+    box-sizing: border-box;
     z-index: 1000;
-    margin-top: 25px;
-    border-radius: 28px;
+    transition: .3s;
 }
 
-.moblieHeader {
-    display: none;
-}
-
-.middelSide {
+.imageContainer {
+    position: relative;
+    width: 120px; 
+    height: 80px; 
+    flex-shrink: 0;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.imageContainer img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.linksContainer {
+        display: flex;
     justify-content: center;
     align-items: center;
-    gap: 45px;
+    gap: 50px;
+    flex: 1;
 }
 
 .headerLink {
     position: relative;
-    color: var(--second-color);
     text-decoration: none;
-    font-size: 25px;
-    border-radius: 28px;
-    padding: 7px;
-    transition: .3s;
+    font-size: 20px;
+    color: var(--second-color);
+    padding: 8px 0;
+    transition: color 0.3s;
 }
 
 .headerLink::after {
     content: "";
     position: absolute;
     bottom: 0;
-    right: 0;
-    width: 100%;
+    left: 0;
+    width: 0;
     height: 2px;
     background-color: var(--second-color);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
+    transition: width 0.3s;
 }
 
 .headerLink:hover::after {
-    transform: scaleX(1); 
+    width: 100%;
 }
-
-.contact {
-    background-color: var(--second-color);
-    text-decoration: none;
-    font-size: 25px;
-    color: var(--background-color);
-    border-radius: 28px;
-    padding: 7px;
-    transition: .3s;
+.langBtnContainer {
+    padding: 35px;
 }
-
-.contact:hover {
-    background-color: #9ab81f;
-}
-
-.leftSide {
+.langBtn {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 30px;
+    height: 20px;
 }
-
-.mobileBar {
+.moblieHeader {
     display: none;
 }
 
@@ -90,19 +79,20 @@
         position: fixed;
         top: 0;
         width: 100%;
-        height: 80px;
+        min-height: 80px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        padding: 15px 1%;
         overflow: hidden;
         background-color: var(--background-color);
-        transition: .3s;
+        padding-bottom: 10px;
         z-index: 1000;
     }
-    .moblieHeader.active {
-        height: 300px;
+    .mobileImage {
+        position: relative;
+        width: 80px;
+        height: 100px;
     }
     .head {
         width: 100%;
@@ -110,20 +100,16 @@
         justify-content: space-between;
         align-items: center;
     }
-
-    .leftSide {
-        position: relative;
-        width: 80px;
-        height: 80px;
+    .headerBtn {
+        padding: 22px;
     }
-
-    .rightSide button {
-        background-color: transparent;
-        border: none;
+    .headerBtn button {
         color: var(--second-color);
-        font-size: 25px;
+        border: none;
+        font-size: 22px;
+        border-radius: 8px;
+        background-color: transparent;
     }
-
     .body {
         width: 100%;
         display: flex;
@@ -131,11 +117,14 @@
         align-items: start;
         flex-direction: column;
         gap: 10px;
-        padding: 15px 1%;
+        padding: 0 22px;
     }
     .moblieLinks {
-        text-decoration: none;
         color: var(--second-color);
+        text-decoration: none;
         font-size: 20px;
+    }
+    .moblieLangContainer {
+        width: 100%;
     }
 }

@@ -1,82 +1,103 @@
 'use client';
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useSearchParams } from "next/navigation";
+import ar from "../../locales/ar.json";
+import en from "../../locales/en.json";
 import styles from "./styles.module.css";
 import aboutImage from "../../public/images/about.jpeg";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function About() {
-  const sectionRef = useRef(null);
-  const imageWrapperRef = useRef(null);
-  const textRef = useRef(null);
+    const searchParams = useSearchParams();
+    const locale = searchParams.get("locale") || "en";
+    const t = locale === "ar" ? ar : en;
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // أنيميشن الصورة
-      gsap.fromTo(
-        imageWrapperRef.current,
-        { borderRadius: "50%" },
-        {
-          borderRadius: "8px",
-          duration: 1.5,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-          },
+    // refs
+    const titleRef = useRef(null);
+    const textContainerRef = useRef(null);
+    const imageContainerRef = useRef(null);
+
+    useEffect(() => {
+        // Animate title
+        if (titleRef.current) {
+            gsap.from(titleRef.current.children, {
+                y: 20,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: titleRef.current,
+                    start: "top 90%",
+                }
+            });
         }
-      );
 
-      // أنيميشن النصوص
-      gsap.fromTo(
-        textRef.current.querySelectorAll("p, h3"),
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 85%",
-          },
+        // Animate text
+        if (textContainerRef.current) {
+            gsap.from(textContainerRef.current.children, {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.3,
+                scrollTrigger: {
+                    trigger: textContainerRef.current,
+                    start: "top 80%",
+                }
+            });
         }
-      );
-    }, sectionRef);
 
-    return () => ctx.revert();
-  }, []);
+        // Animate image container
+        if (imageContainerRef.current) {
+            gsap.fromTo(
+                imageContainerRef.current,
+                { 
+                    scale: 0.9,
+                    opacity: 0.5,
+                    borderRadius: "50%" 
+                },
+                { 
+                    scale: 1,
+                    opacity: 1,
+                    borderRadius: "8px",
+                    duration: 1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: imageContainerRef.current,
+                        start: "top 80%",
+                    }
+                }
+            );
+        }
+    }, []);
 
-  return (
-    <div className={styles.about} ref={sectionRef}>
-      <div className={styles.leftSide} ref={textRef}>
-        <p>من نحن</p>
-        <h3>نحن نقدم أكثر من مجرد شحنة من الراحة والقيمة</h3>
-        <p>
-          نحن شركة شحن متخصصة في تقديم حلول توصيل آمنة وسريعة داخل وخارج
-          الجمهورية. نعمل على توفير أفضل تجربة لعملائنا من خلال الالتزام
-          بالمواعيد، تتبع الشحنات لحظة بلحظة، وخدمات دعم متاحة دائمًا. نسعى أن
-          نكون الشريك الموثوق لعملك، من خلال شبكة شحن واسعة تغطي جميع المحافظات،
-          وخدمات مرنة تناسب الأفراد والشركات على حد سواء.
-        </p>
-      </div>
-        <div className={styles.imageContainer}>
-            <div className={styles.rightSide}>
-                <Image
-                    src={aboutImage}
-                    alt="aboutImage"
-                    fill
-                    style={{ objectFit: "cover", borderRadius: '8px' }}
-                    ref={imageWrapperRef}
-                />
+    return (
+        <div className={styles.about} id="about">
+            <div className={styles.title} ref={titleRef}>
+                <p>{t.aboutTitle}</p>
+                <h2>{t.aboutTitleH2}</h2>
+                <p>{t.aboutTitleP}</p>
+            </div>
+            <div className={styles.content}>
+                <div className={styles.textContainer} ref={textContainerRef}>
+                    <h2>{t.aboutTextH2}</h2>
+                    <p>{t.aboutTextP}</p>
+                </div>
+                {/* ref بقى هنا على الـ container مش على Image */}
+                <div className={styles.imageContainer} ref={imageContainerRef}>
+                    <Image
+                        src={aboutImage}
+                        fill
+                        style={{ objectFit: 'cover', borderRadius: '8px' }}
+                        alt="About section image"
+                    />
+                </div>
             </div>
         </div>
-    </div>
-  );
+    );
 }
 
 export default About;
