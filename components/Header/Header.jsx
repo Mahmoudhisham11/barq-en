@@ -16,16 +16,15 @@ export default function Header() {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const locale = searchParams.get("locale") || "en"
+  const [locale, setLocale] = useState(searchParams.get("locale") || "en")
   const t = locale === "ar" ? ar : en
 
-  // refs for gsap
   const menuRef = useRef(null)
   const linksRef = useRef([])
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  // تغيير اتجاه الصفحة
+  // تغيير اتجاه الصفحة عند تغير اللغة
   useEffect(() => {
     document.documentElement.dir = locale === "ar" ? "rtl" : "ltr"
     document.body.classList.toggle("rtl", locale === "ar")
@@ -34,49 +33,36 @@ export default function Header() {
   // دالة تبديل اللغة
   const toggleLocale = () => {
     const newLocale = locale === "ar" ? "en" : "ar"
-    const params = new URLSearchParams(searchParams.toString())
+    const params = new URLSearchParams(window.location.search)
     params.set("locale", newLocale)
     router.push(`${pathname}?${params.toString()}`)
-    document.body.classList.toggle("rtl", newLocale === "ar")
+    setLocale(newLocale) // تحديث الحالة فورًا
   }
 
-  // فتح/قفل المينيو مع انيميشن
+  // انيميشن فتح/قفل المينيو
   useEffect(() => {
     if (isOpen) {
-      gsap.to(menuRef.current, { 
-        height: "auto", 
-        duration: 0.5, 
-        ease: "power2.out" 
-      })
+      gsap.to(menuRef.current, { height: "auto", duration: 0.5, ease: "power2.out" })
       gsap.fromTo(
         linksRef.current,
         { y: -20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, delay: 0.2 }
       )
     } else {
-      gsap.to(menuRef.current, { 
-        height: 0, 
-        duration: 0.4, 
-        ease: "power2.in" 
-      })
+      gsap.to(menuRef.current, { height: 0, duration: 0.4, ease: "power2.in" })
     }
   }, [isOpen])
 
+  // تغيير خلفية الهيدر عند التمرير
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
-      }
-    }
+    const handleScroll = () => setIsScrolled(window.scrollY > 50)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   return (
     <header className={styles.headerContainer}>
-      <div className={styles.header} style={{backgroundColor: isScrolled ? 'black' : 'transparent'}}>
+      <div className={styles.header} style={{ backgroundColor: isScrolled ? 'black' : 'transparent' }}>
         <div className={styles.imageContainer}>
           <Image src={logo} fill style={{ objectFit: "cover" }} alt="logo" />
         </div>
@@ -92,11 +78,12 @@ export default function Header() {
               src={locale === "ar" ? uk : egypt}
               alt="switch language"
               fill
-              style={{objectFit: 'cover'}}
+              style={{ objectFit: 'cover' }}
             />
           </button>
         </div>
       </div>
+
       {/* Mobile Header */}
       <div className={styles.moblieHeader}>
         <div className={styles.head}>
@@ -105,21 +92,22 @@ export default function Header() {
           </div>
           <div className={styles.headerBtn}>
             <button onClick={() => setIsOpen(!isOpen)}>
-              <FaBars/>
+              <FaBars />
             </button>
           </div>
         </div>
-        <div 
-          className={styles.body} 
-          ref={menuRef} 
+        <div
+          className={styles.body}
+          ref={menuRef}
           style={{ height: 0, overflow: "hidden" }}
         >
           {["home", "about", "services", "contact"].map((link, i) => (
-            <Link 
+            <Link
               key={link}
-              href={`#${link}`} 
-              className={styles.moblieLinks} 
+              href={`#${link}`}
+              className={styles.moblieLinks}
               ref={(el) => (linksRef.current[i] = el)}
+              onClick={() => setIsOpen(false)} // غلق المينيو بعد الضغط
             >
               {t[`${link}Link`]}
             </Link>
@@ -130,7 +118,7 @@ export default function Header() {
                 src={locale === "ar" ? uk : egypt}
                 alt="switch language"
                 fill
-                style={{objectFit: 'cover'}}
+                style={{ objectFit: 'cover' }}
               />
             </button>
           </div>

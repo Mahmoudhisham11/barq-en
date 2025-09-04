@@ -1,7 +1,4 @@
 'use client';
-import { useSearchParams } from "next/navigation";
-import ar from "../../locales/ar.json";
-import en from "../../locales/en.json";
 import styles from "./styles.module.css";
 import { PiPhoneCallFill } from "react-icons/pi";
 import { RiComputerLine } from "react-icons/ri";
@@ -12,10 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Services() {
-    const searchParams = useSearchParams();
-    const locale = searchParams.get("locale") || "en";
-    const t = locale === "ar" ? ar : en;
+export default function Services({ t }) {
 
     const servicesRef = useRef(null);
 
@@ -77,7 +71,5 @@ function Services() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
-
-export default Services;

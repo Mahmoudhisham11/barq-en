@@ -1,28 +1,22 @@
-'use client'
-import { useSearchParams } from "next/navigation"
-import ar from "../../locales/ar.json"
-import en from "../../locales/en.json"
+'use client';
 import styles from "./styles.module.css";
 import Header from "../Header/Header";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-export default function Hero() {
-  const searchParams = useSearchParams()
-  const locale = searchParams.get("locale") || "en"
-  const t = locale === "ar" ? ar : en
+export default function Hero({ t, locale }) {
 
-  // نعمل refs عشان نحدد العناصر اللي هيتعملها انيميشن
+  // refs للانيميشن
   const textRef = useRef([]);
   const btnRef = useRef(null);
 
   useEffect(() => {
     gsap.from(textRef.current, {
-      y: 50,          // ينزل من تحت
-      opacity: 0,     // يبقى شفاف
-      duration: 1,    // مدة الحركة
-      stagger: 0.3,   // تأخير بين كل عنصر والتاني
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.3,
       ease: "power3.out"
     });
 
@@ -37,7 +31,7 @@ export default function Hero() {
 
   return (
     <div className={styles.hero}>
-       <Header/>
+       <Header t={t} locale={locale}/>
        <div className={styles.content}>
           <div className={styles.text}>
             <h2 ref={el => textRef.current[0] = el}>{t.heroH1} <span>{t.span1}</span></h2>
@@ -47,5 +41,5 @@ export default function Hero() {
           </div>
        </div>
     </div>
-  )
+  );
 }
