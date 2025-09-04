@@ -3,7 +3,7 @@ import { useSearchParams } from "next/navigation"
 import ar from "../../locales/ar.json"
 import en from "../../locales/en.json"
 import styles from "./styles.module.css";
-import Header from "../Header/page";
+import Header from "../Header/Header";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
