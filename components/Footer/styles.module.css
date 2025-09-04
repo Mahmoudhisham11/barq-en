@@ -24,7 +24,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-start;
 }
 .title {
     text-align: start;
@@ -38,8 +38,8 @@
 }
 .linkContainer {
     display: flex;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-direction: column;
     gap: 5px;
 }
