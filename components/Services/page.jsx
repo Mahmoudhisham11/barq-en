@@ -50,27 +50,27 @@ function Services() {
                     <div className={styles.card}>
                         <div className={styles.cardHead}>
                             <p><PiPhoneCallFill /></p>
+                            <h3>{t.servicesCard1H3}</h3>
                         </div>
                         <div className={styles.cardBody}>
-                            <h3>{t.servicesCard1H3}</h3>
                             <p>{t.servicesCard1p}</p>
                         </div>
                     </div>
                     <div className={styles.card}>
                         <div className={styles.cardHead}>
                             <p><RiComputerLine /></p>
+                            <h3>{t.servicesCard2H3}</h3>
                         </div>
                         <div className={styles.cardBody}>
-                            <h3>{t.servicesCard2H3}</h3>
                             <p>{t.servicesCard2p}</p>
                         </div>
                     </div>
                     <div className={styles.card}>
                         <div className={styles.cardHead}>
                             <p><GrMoney /></p>
+                            <h3>{t.servicesCard3H3}</h3>
                         </div>
                         <div className={styles.cardBody}>
-                            <h3>{t.servicesCard3H3}</h3>
                             <p>{t.servicesCard3p}</p>
                         </div>
                     </div>
