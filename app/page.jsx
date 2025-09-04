@@ -9,9 +9,10 @@ import Footer from "@/components/Footer/Footer";
 import ar from "../locales/ar.json";
 import en from "../locales/en.json";
 
-export default function Home() {
+export default function HomePage() {
+  // نستخدم hook للـ client side فقط
   const searchParams = useSearchParams();
-  const locale = searchParams.get("locale") || "en"; // تحديد اللغة من الـ URL
+  const locale = searchParams?.get("locale") || "en"; // تحديد اللغة من الـ URL
   const t = locale === "ar" ? ar : en; // اختيار اللغة المناسبة
 
   return (
