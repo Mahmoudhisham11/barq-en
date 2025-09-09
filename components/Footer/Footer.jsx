@@ -17,6 +17,7 @@ export default function Footer() {
             <p>+20 105 582 8222</p>
             <p>+20 122 223 3666</p>
             <p>+20 112 678 4187</p>
+            <p>+20 109 528 9495</p>
           </div>
           <div className={styles.linkContainer}>
             <p>Fast Links</p>

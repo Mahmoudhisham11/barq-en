@@ -29,6 +29,10 @@ export default function Contact() {
             <span><IoCall /></span>
             <span>+20 112 678 4187</span>
           </strong>
+          <strong>
+            <span><IoCall /></span>
+            <span>+20 109 528 9495</span>
+          </strong>
         </div>
         <div className={styles.leftSide}>
           <iframe

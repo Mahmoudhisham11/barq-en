@@ -1,11 +1,12 @@
 'use client'
-import { useRouter} from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { FaBars } from "react-icons/fa6";
 import gsap from "gsap"
 import styles from "./styles.module.css"
 import Image from "next/image"
 import logo from "../../public/images/logo.png"
+import egypt from "../../public/images/egypt.png"  // تأكد إن الصورة موجودة
 import Link from "next/link"
 
 export default function Header() {
@@ -14,6 +15,14 @@ export default function Header() {
   const linksRef = useRef([])
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+
+  // روابط الهيدر
+  const links = [
+    { id: "home", label: "Home" },
+    { id: "about", label: "About us" },
+    { id: "services", label: "Services" },
+    { id: "contact", label: "Contact us" },
+  ]
 
   // انيميشن فتح/قفل المينيو
   useEffect(() => {
@@ -38,17 +47,22 @@ export default function Header() {
 
   return (
     <header className={styles.headerContainer}>
+      {/* Desktop Header */}
       <div className={styles.header} style={{ backgroundColor: isScrolled ? 'black' : 'transparent' }}>
         <div className={styles.imageContainer}>
           <Image src={logo} fill style={{ objectFit: "cover" }} alt="logo" />
         </div>
         <div className={styles.linksContainer}>
-          <Link href={"#home"} className={styles.headerLink}>Home</Link>
-          <Link href={"#about"} className={styles.headerLink}>About us</Link>
-          <Link href={"#services"} className={styles.headerLink}>Services</Link>
-          <Link href={"#contact"} className={styles.headerLink}>Contact us</Link>
+          {links.map(link => (
+            <Link key={link.id} href={`#${link.id}`} className={styles.headerLink}>
+              {link.label}
+            </Link>
+          ))}
         </div>
         <div className={styles.langBtnContainer}>
+          <button onClick={() => router.push("https://barq-shipping.netlify.app/")} className={styles.langBtn}>
+            <Image src={egypt} alt="egypt" fill style={{ objectFit: "cover" }} />
+          </button>
         </div>
       </div>
 
@@ -69,18 +83,21 @@ export default function Header() {
           ref={menuRef}
           style={{ height: 0, overflow: "hidden" }}
         >
-          {["home", "about", "services", "contact"].map((link, i) => (
+          {links.map((link, i) => (
             <Link
-              key={link}
-              href={`#${link}`}
+              key={link.id}
+              href={`#${link.id}`}
               className={styles.moblieLinks}
               ref={(el) => (linksRef.current[i] = el)}
-              onClick={() => setIsOpen(false)}
+              onClick={() => setIsOpen(false)}  // هنا بيقفل المنيو بعد الضغط
             >
-              {link}
+              {link.label}
             </Link>
           ))}
           <div className={styles.moblieLangContainer}>
+            <button onClick={() => router.push("https://barq-shipping.netlify.app/")} className={styles.langBtn}>
+              <Image src={egypt} alt="egypt" fill style={{ objectFit: "cover" }} />
+            </button>
           </div>
         </div>
       </div>
