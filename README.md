@@ -43,3 +43,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 "# barq_en" 
 "# barq_en" 
 "# barq_en" 
+"# barq-en" 
