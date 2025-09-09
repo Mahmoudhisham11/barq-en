@@ -3,28 +3,27 @@ import styles from "./styles.module.css";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 
-export default function Footer({ t }) {
+export default function Footer() {
   return (
     <div className={styles.footerContainer}>
       <div className={styles.footer}>
         <div className={styles.footerContent}>
           <div className={styles.title}>
-            <h3>{t.footerTitleP1} <span>{t.footerTitleP2}</span> {t.footerTitleP3}</h3>
+            <h3>With <span>BARQ,</span> the fastest shipment in Egypt from Cairo and Giza to Alexandria, Lower Egypt, Hurghada and Upper Egypt</h3>
           </div>
           <div className={styles.linkContainer}>
-            <p>{t.contactTitle}</p>
-            <p>{t.address}</p>
-            <p>{t.phone1}</p>
-            <p>{t.phone2}</p>
-            <p>{t.phone3}</p>
-            <p>{t.phone4}</p>
+            <p>Contact us</p>
+            <p>Ezbet Alaa El-Din - Khusus - Qalyubia</p>
+            <p>+20 105 582 8222</p>
+            <p>+20 122 223 3666</p>
+            <p>+20 112 678 4187</p>
           </div>
           <div className={styles.linkContainer}>
-            <p>{t.footerLinkTitle}</p>
-            <Link href={"#home"} className={styles.Links}>{t.homeLink}</Link>
-            <Link href={"#about"} className={styles.Links}>{t.aboutLink}</Link>
-            <Link href={"#services"} className={styles.Links}>{t.servicesLink}</Link>
-            <Link href={"#contact"} className={styles.Links}>{t.contactLink}</Link>
+            <p>Fast Links</p>
+            <Link href={"#home"} className={styles.Links}>Home</Link>
+            <Link href={"#about"} className={styles.Links}>About us</Link>
+            <Link href={"#services"} className={styles.Links}>Services</Link>
+            <Link href={"#contact"} className={styles.Links}>Contact us</Link>
           </div>
         </div>
         <div className={styles.icons}>
@@ -33,8 +32,8 @@ export default function Footer({ t }) {
         </div>
         <hr style={{ width: '100%' }} />
         <div className={styles.cobyRights}>
-          <h4>&copy; {t.copyRight}</h4>
-          <p>{t.companyName} DEVORIA</p>
+          <h4>&copy; Licensed copy of BARQ Company. All rights reserved.</h4>
+          <p>Designed By: DEVORIA</p>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Services({ t }) {
+export default function Services() {
 
     const servicesRef = useRef(null);
 
@@ -36,36 +36,36 @@ export default function Services({ t }) {
         <div className={styles.servicesContainer} id="services">
             <div className={styles.services} ref={servicesRef}>
                 <div className={styles.title}>
-                    <p>{t.servicesIntro}</p>
-                    <h2>{t.servicesHeadline}</h2>
-                    <p>{t.servicesDesc}</p>
+                    <p>Our Services</p>
+                    <h2>Fast & Reliable</h2>
+                    <p>We provide comprehensive shipping solutions with speed, security, and full support for all your logistics needs.</p>
                 </div>
                 <div className={styles.content}>
                     <div className={styles.card}>
                         <div className={styles.cardHead}>
                             <p><PiPhoneCallFill /></p>
-                            <h3>{t.servicesCard1H3}</h3>
+                            <h3>Customer Service</h3>
                         </div>
                         <div className={styles.cardBody}>
-                            <p>{t.servicesCard1p}</p>
+                            <p>We have a specialized customer service team to solve all our customers' problems and follow up with our customers moment by moment in managing their shipments.</p>
                         </div>
                     </div>
                     <div className={styles.card}>
                         <div className={styles.cardHead}>
                             <p><RiComputerLine /></p>
-                            <h3>{t.servicesCard2H3}</h3>
+                            <h3>Track accounts</h3>
                         </div>
                         <div className={styles.cardBody}>
-                            <p>{t.servicesCard2p}</p>
+                            <p>Through your account on the company’s program, you will be able to track your shipments and see and know where each shipment you have with us</p>
                         </div>
                     </div>
                     <div className={styles.card}>
                         <div className={styles.cardHead}>
                             <p><GrMoney /></p>
-                            <h3>{t.servicesCard3H3}</h3>
+                            <h3>Collection</h3>
                         </div>
                         <div className={styles.cardBody}>
-                            <p>{t.servicesCard3p}</p>
+                            <p>With our collection service, you can easily receive your collections daily, and we also offer you the possibility of obtaining an advance of up to 15%.</p>
                         </div>
                     </div>
                 </div>

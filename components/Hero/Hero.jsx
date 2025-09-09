@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-export default function Hero({ t, locale }) {
+export default function Hero() {
 
   // refs للانيميشن
   const textRef = useRef([]);
@@ -31,13 +31,13 @@ export default function Hero({ t, locale }) {
 
   return (
     <div className={styles.hero}>
-       <Header t={t} locale={locale}/>
+       <Header/>
        <div className={styles.content}>
           <div className={styles.text}>
-            <h2 ref={el => textRef.current[0] = el}>{t.heroH1} <span>{t.span1}</span></h2>
-            <h2 ref={el => textRef.current[1] = el}>{t.part1} <span>{t.span2}</span> {t.heroH2}</h2>
-            <h2 ref={el => textRef.current[2] = el}>{t.heroH3} <span>{t.span3}</span></h2>
-            <Link ref={btnRef} href={"/"} className={styles.heroLink}>{t.heroBtn}</Link>
+            <h2 ref={el => textRef.current[0] = el}>We can deliver your <span>shipment</span></h2>
+            <h2 ref={el => textRef.current[1] = el}>Easily, <span>quickly</span> and safely</h2>
+            <h2 ref={el => textRef.current[2] = el}>Wherever you <span>are</span></h2>
+            <Link ref={btnRef} href={"/"} className={styles.heroLink}>Learn more</Link>
           </div>
        </div>
     </div>

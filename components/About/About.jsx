@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function About({ t }) {
+export default function About() {
   const titleRef = useRef(null);
   const textRef = useRef(null);
   const imageRef = useRef(null);
@@ -65,14 +65,14 @@ export default function About({ t }) {
   return (
     <div className={styles.about} id="about">
       <div className={styles.title} ref={titleRef}>
-        <p>{t.aboutTitle}</p>
-        <h2>{t.aboutTitleH2}</h2>
-        <p>{t.aboutTitleP}</p>
+        <p>About us</p>
+        <h2>Why choose us</h2>
+        <p>Because Barq will make it easier for you to send your package with the features we offer</p>
       </div>
       <div className={styles.content}>
         <div className={styles.textContainer} ref={textRef}>
-          <h2>{t.aboutTextH2}</h2>
-          <p>{t.aboutTextP}</p>
+          <h2>We deliver more than shipments — we deliver peace of mind and reliability</h2>
+          <p>Our team ensures every package reaches its destination safely and on time. With advanced tracking and dedicated support, we make shipping simple and worry-free for you.</p>
         </div>
         <div className={styles.imageContainer} ref={imageRef}>
           <Image
